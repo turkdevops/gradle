@@ -35,7 +35,7 @@ public class TextUtil {
     private static final Function<String, String> TO_LOWERCASE = new Function<String, String>() {
         @Override
         public String apply(String input) {
-            return input.toLowerCase();
+            return TextUtil.toLowerCaseUserLocale(input);
         }
     };
     private static final Pattern NON_UNIX_LINE_SEPARATORS = Pattern.compile("\r\n|\r");
@@ -206,5 +206,31 @@ public class TextUtil {
      */
     public static String toLowerCaseLocaleSafe(String s) {
         return s.toLowerCase(Locale.ENGLISH);
+    }
+
+    /**
+     * Replacement for the locale-dependent {@code String.toLowerCase()}.
+     *
+     * <p>In most cases, string manipulations should be independent from the current locale and {@code String.toLowerCase(Locale.XXX)} should be used. In case a particular code does need to use the
+     * locale-dependent, this method has to be used, otherwise an architecture test will fail.
+     *
+     * @param s string to be made lowercase
+     * @return a lowercase string
+     */
+    public static String toLowerCaseUserLocale(String s) {
+        return s.toLowerCase();
+    }
+
+    /**
+     * Replacement for the locale-dependent {@code String.toUpperCase()}.
+     *
+     * <p>In most cases, string manipulations should be independent from the current locale and {@code String.toUpperrCase(Locale.XXX)} should be used. In case a particular code does need to use the
+     * locale-dependent, this method has to be used, otherwise an architecture test will fail.
+     *
+     * @param s string to be made lowercase
+     * @return a lowercase string
+     */
+    public static String toUpperCaseUserLocale(String s) {
+        return s.toUpperCase();
     }
 }
